@@ -2,24 +2,27 @@
 IMDBCrawler
 """
 import requests
-
+import random
+import time
+from .imdb_agent_generator import IMDBAgentGenerator
 
 class IMDBCrawler():
-	"""
+    """
     IMDBCrawler class
-	"""
+    """
 
-	def __init__(self, url):
+    def __init__(self, url):
 
         self._base_url = url
         self._sleep_min = 1
-        self._sleep_max = 4
+        self._sleep_max = 2
+        self._user_agent_generator = IMDBAgentGenerator()
         
     def _get_agent(self):
         """
         Generates a new user agent to be user
         """
-        return self._user_agent_generator.random
+        return self._user_agent_generator.random_agent()
     
     def _sleep(self):
         """
@@ -33,15 +36,16 @@ class IMDBCrawler():
         HTTP GET envelope
         """
         user_agent = self._get_agent()
-        headers = {'Content-Type': 'application/x-www-form-urlencoded',
-                   'User-Agent': user_agent}
+        headers = {'User-Agent': user_agent}
         self._sleep()
-        requests.get(url, headers=headers)
+        return requests.get(url, headers=headers)
     
     def get_movie_page(self, url):
         # TODO: get movie page
-        pass
+        page = self._http_get(url).text
+        return page
         
     def get_movie_list_page(self, url):
         # TODO: get the list movie page
-        pass
+        page = self._http_get(url).text
+        return page
