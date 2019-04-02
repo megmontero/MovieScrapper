@@ -12,6 +12,8 @@ class IMDBCrawler():
 	def __init__(self, url):
 
         self._base_url = url
+        self._sleep_min = 1
+        self._sleep_max = 4
         
     def _get_agent(self):
         """
@@ -23,7 +25,7 @@ class IMDBCrawler():
         """
         Sleeps random seconds so we don't get banned :)
         """
-        seconds = random.randint(self.sleep_min, self.sleep_max)
+        seconds = random.randint(self._sleep_min, self._sleep_max)
         time.sleep(seconds)
     
     def _http_get(self, url):
