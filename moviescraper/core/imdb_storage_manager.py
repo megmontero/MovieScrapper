@@ -12,6 +12,5 @@ class IMDBStorageManager():
     def __init__(self):
         pass
         
-    def write(movie):
-
+    def write(self, movie):
         print(movie)
