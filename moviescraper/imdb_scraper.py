@@ -4,7 +4,7 @@ IMDB Scraper class
 
 Authors:
             Gregorio A. García Menéndez (gagarcia)
-            Manuel E. Gómez Montero
+            Manuel E. Gómez Montero (mnlgmontero)
 
 """
 
@@ -38,7 +38,7 @@ class IMDBScraper():
                 movie_page = self._crawler.get_movie_page(movie_url)
                 movie_info = self._extractor.get_movie_info(movie_page)
                 # STUB!!! DEBUG!! UNCOMMENT!!
-                # self._archiver.write(movie_info)
+                self._archiver.write(movie_info)
                 self._archiver.write(movie_url)
 
     def _get_movies_full(self):

@@ -2,8 +2,8 @@
 IMDBMovieExtractor
 """
 
-from bs4 import BeautifulSoup
-
+from bs4 import BeautifulSoup 
+import json
 class IMDBMovieExtractor():
     def __init__(self, base_url):
         self._base_url = base_url
@@ -13,7 +13,15 @@ class IMDBMovieExtractor():
         Extracts all the movie info from a html movie page
         """
         # TODO: implement
-        movie_info = {'test': movie_page}
+        soup = BeautifulSoup(movie_page , "html.parser")
+
+        title,year = (soup.select('h1')[0].text.strip()).split("\xa0")
+        year = int(year.strip('()'))
+        pageId = soup.find("meta",  property="pageId")["content"]
+
+        data = json.loads(soup.find('script', type='application/ld+json').text)
+        
+        movie_info = {'title': title, "year": year, "id":pageId , "data": data}
         return movie_info
     
     def get_movie_list(self, list_page):
