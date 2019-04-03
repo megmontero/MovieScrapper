@@ -39,7 +39,7 @@ class IMDBScraper():
                 movie_info = self._extractor.get_movie_info(movie_page)
                 # STUB!!! DEBUG!! UNCOMMENT!!
                 self._archiver.write(movie_info)
-                self._archiver.write(movie_url)
+                #self._archiver.write(movie_url)
 
     def _get_movies_full(self):
         """
