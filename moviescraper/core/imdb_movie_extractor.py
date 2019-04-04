@@ -1,39 +1,94 @@
 """
-IMDBMovieExtractor
+ImDBmovieExtractor
 """
 
 from bs4 import BeautifulSoup 
 import json
+import re
 class IMDBMovieExtractor():
     def __init__(self, base_url):
         self._base_url = base_url
     
-    def get_movie_info(self, movie_page):
+    def get_movie_info(self, movie_page, movie_rating_page):
         """
         Extracts all the movie info from a html movie page
         """
-        # TODO: implement
         soup = BeautifulSoup(movie_page , "html.parser")
-
-        title,year = (soup.select('h1')[0].text.strip()).split("\xa0")
-        year = int(year.strip('()'))
-        pageId = soup.find("meta",  property="pageId")["content"]
-
-        data = json.loads(soup.find('script', type='application/ld+json').text)
         
-        movie_info = {'title': title, "year": year, "id":pageId , "data": data}
+        movie_info = json.loads(soup.find('script', type='application/ld+json').text)
+        titleyear = (soup.select('h1')[0].text.strip()).split("\xa0")
+        movie_info["title"] = titleyear[0]
+        if len(titleyear)>1:
+            movie_info["year"] = int(titleyear[1].strip('()'))
+        movie_info["id"]= soup.find("meta",  property="pageId")["content"]
+
+        if "actor" in movie_info:
+            movie_info["actors"] = self.extract_person_list(movie_info["actor"])
+        if "creator" in movie_info:
+            movie_info["creators"] = self.extract_person_list(movie_info["creator"])
+        if "director" in movie_info:
+            movie_info["directors"] = self.extract_person_list(movie_info["director"])
+        
+        remove_keys = ["@context", "image", "url", "aggregateRating", 
+                       "review", "trailer", "actor", "creator", "director"]
+        for k in remove_keys:
+            movie_info.pop(k, None)
+        movie_info["rating"]=  self.get_movie_rating_info(movie_rating_page)
         return movie_info
-    
+   
+
+    def extract_person_list(self,main_list):
+        """
+        From a list of creators, directors or actors extract only persons
+        and change url for id
+        """
+        if not isinstance(main_list, list):
+            main_list = [main_list]
+        person_list = []
+        for p in main_list:
+            if p["@type"] == 'Person':
+                new_person = {"name": p["name"],
+                              "id": re.search("nm\d{7}", p["url"]).group(0)}
+                person_list.append(new_person)
+        return person_list 
+
+
+
     def get_movie_list(self, list_page):
         """
         Extracts all the movies url inside list_page
         """
-        # TODO: implement next page url!!!
-        movie_urls = []
+        movie_ids = []
         soup = BeautifulSoup(list_page, 'html.parser')
         movie_frames = soup.find_all(class_='lister-item-header')
+        next_page = soup.find("a", {"class":"next-page" }, href=True)
+        if (next_page):
+            next_page= self._base_url + next_page["href"]
         for frame in movie_frames:
             link = frame.find('a').get('href')
-            movie_url = self._base_url + link
-            movie_urls.append(movie_url)
-        return (movie_urls, None)
+            movie_id = re.search("tt\d{7}", link).group(0)
+            movie_ids.append(movie_id)
+        return (movie_ids, next_page)
+
+    def get_movie_rating_info(self, movie_rating_page):
+        """
+        Extracts demographic rating info from a html movie rating page
+        """
+        soup = BeautifulSoup(movie_rating_page , "html.parser")
+        movie_ratings = []
+        rating_cells = soup.findAll("td", {"class": "ratingTable"})
+        demo_labels = ["all", "<18", "18-29", "30-44", "45+", 
+                        "males", "m<18", "m18-29", "m30-44", "m45+",
+                        "females", "f<18", "f18-29", "f30-44", "f45+"]
+        for c, label in enumerate(demo_labels):
+            try:
+                rating = float(rating_cells[c].find("div", {"class": "bigcell"}).text.strip())
+                votes = int(rating_cells[c].find("div", {"class": "smallcell"}).text.replace(",", "").strip())
+            except:
+                rating = '-'
+                votes = '-'
+            group = {"group": label, "rating": rating, "votes": votes}
+            movie_ratings.append(group)
+        return movie_ratings
+
+
