@@ -44,7 +44,7 @@ class IMDBScraper():
                 movie_info = self._extractor.get_movie_info(movie_page, rating_movie_page)
                 # Iterate over all actors / creators / directors
                 try:
-                    actors_list = movie_info['actorw']
+                    actors_list = movie_info['actors']
                 except KeyError:
                     actors_list = []
                 try:
