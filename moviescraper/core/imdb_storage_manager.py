@@ -12,15 +12,21 @@ class IMDBStorageManager():
         self._db = UnQLite(self._dbfile)
 
     def write(self, doc, collection="movies"):
-        col = self._db.collection(collection)
-        col.create()
-        col.store(doc)
-        self._db.commit()
+        if doc is not None:
+            col = self._db.collection(collection)
+            col.create()
+            col.store(doc)
+            self._db.commit()
 
     """
     Check if ID exists
     """
-    def checkId(self,docId, collection="movies"):
+    def exists_id(self, docId, collection="movies"):
         col = self._db.collection(collection)
-        return len(col.filter(lambda x: x["id"] == str.encode(docId))) >0
+        if col is None:
+            return False
+        search_result = col.filter(lambda x: x["id"] == str.encode(docId))
+        if search_result is None:
+            return False
+        return len(search_result) > 0
 
