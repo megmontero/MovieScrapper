@@ -33,7 +33,7 @@ class IMDBMovieExtractor():
                        "review", "trailer", "actor", "creator", "director"]
         for k in remove_keys:
             movie_info.pop(k, None)
-        movie_info["rating"]=  self.get_movie_rating_info(movie_rating_page)
+        movie_info["rating"] =  self.get_movie_rating_info(movie_rating_page)
         return movie_info
    
 
@@ -90,5 +90,41 @@ class IMDBMovieExtractor():
             group = {"group": label, "rating": rating, "votes": votes}
             movie_ratings.append(group)
         return movie_ratings
+
+    def get_person_info(self, person_page):
+        """
+        Extracts info of the casting person page passed by parameter
+        """
+        soup = BeautifulSoup(person_page , "html.parser")
+        movie_ratings = []
+        casting_categories = soup.findAll("div", {"class": "head"})
+        casting_section = soup.findAll("div", {"class": "filmo-category-section"})
+        script_person_info = json.loads(soup.find('script', type='application/ld+json').text)
+        person_info = {}
+        person_info["id"] = soup.find("meta",  property="pageId")["content"]
+        person_info["name"] = script_person_info["name"]
+        try:
+            # Optional field
+            person_info["birth_date"] = script_person_info["birthDate"]
+        except KeyError:
+            person_info["birth_date"] = None
+
+        casting_result = []
+        for category, section in zip(casting_categories, casting_section):
+            current_category = category.find("a").text
+            item_list = []
+            section_casting_odd = section.findAll("div", {"class": "filmo-row odd"})
+            section_casting_even = section.findAll("div", {"class": "filmo-row even"})
+            section_casting = section_casting_odd + section_casting_even
+            for item in section_casting:
+                current_item = {}
+                current_id = item.get('id')
+                item_id = current_id.split('-')[1]
+                item_name = item.find("a").text
+                current_item = {'name': item_name, 'id': item_id}
+                item_list.append(current_item)
+            person_info[current_category] = item_list
+
+        return person_info
 
 
