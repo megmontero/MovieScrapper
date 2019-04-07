@@ -9,7 +9,7 @@ class IMDBMovieExtractor():
     def __init__(self, base_url):
         self._base_url = base_url
     
-    def get_movie_info(self, movie_page, movie_rating_page):
+    def get_movie_info(self, movie_page, movie_rating_page, movie_reviews_page):
         """
         Extracts all the movie info from a html movie page
         """
@@ -33,7 +33,9 @@ class IMDBMovieExtractor():
                        "review", "trailer", "actor", "creator", "director"]
         for k in remove_keys:
             movie_info.pop(k, None)
-        movie_info["rating"]=  self.get_movie_rating_info(movie_rating_page)
+        movie_info["rating"]=  self._get_movie_rating_info(movie_rating_page)
+        print(movie_info["id"])
+        movie_info["reviews"] = self._get_movie_reviews_info(movie_reviews_page)
         return movie_info
    
 
@@ -70,7 +72,36 @@ class IMDBMovieExtractor():
             movie_ids.append(movie_id)
         return (movie_ids, next_page)
 
-    def get_movie_rating_info(self, movie_rating_page):
+
+    def _get_movie_reviews_info(self, movie_reviews_page):
+        """
+        Extracts movie reviews info from a html movie reviews page
+        """
+        reviews = [] 
+        soup = BeautifulSoup(movie_reviews_page, 'html.parser')
+        #user_info = soup.find_all(class_='display-name-link')
+        #rating_info = soup.find_all(class_='rating-other-user-rating')
+        rating_info = soup.find_all(class_='review-container')
+        for rating in rating_info: 
+           u = rating.find(class_='display-name-link').find("a", href=True)
+           r_soup = soup.find(class_='review-container')
+           if r_soup:
+                new_rating = {"user": {"name": u.text , 
+                                       "id":   re.search("ur\d{7}", u["href"]).group(0) },
+                              "rating": r_soup.find("span").text}
+                reviews.append(new_rating)
+
+
+
+        #for c, user in enumerate(user_info):
+        #    u = user.find("a", href=True)
+        #    new_rating = {"user": {"name": u.text , 
+        #                           "id":   re.search("ur\d{7}", u["href"]).group(0) },
+        #                  "rating": rating_info[c].find("span").text}
+        #     reviews.append(new_rating)
+        return reviews 
+
+    def _get_movie_rating_info(self, movie_rating_page):
         """
         Extracts demographic rating info from a html movie rating page
         """
