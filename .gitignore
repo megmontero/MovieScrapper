@@ -6,6 +6,8 @@ __pycache__/
 # Database
 moviescraper/db/*
 
+#selenium driver
+moviescraper/drivers/*
 
 
 !.keep
