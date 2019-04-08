@@ -54,7 +54,8 @@ class IMDBScraper():
         end_date = datetime.datetime.today().strftime('%Y-%m-%d')
         endpoint = '/search/title?title_type=feature&year=1894-01-01' + ',' + end_date
         ## DEBUG less time to test better
-        endpoint = '/search/title?title_type=feature&year=2019-04-01' + ',' + end_date
+
+        endpoint = '/search/title?title_type=feature&year=2019-04-05' + ',' + end_date
         self._get_movies(endpoint)
         
     def _get_movies_year(self, int):

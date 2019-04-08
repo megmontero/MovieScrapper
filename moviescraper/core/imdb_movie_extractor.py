@@ -84,11 +84,11 @@ class IMDBMovieExtractor():
         rating_info = soup.find_all(class_='review-container')
         for rating in rating_info: 
            u = rating.find(class_='display-name-link').find("a", href=True)
-           r_soup = soup.find(class_='review-container')
+           r_soup = soup.find(class_='rating-other-user-rating')
            if r_soup:
                 new_rating = {"user": {"name": u.text , 
                                        "id":   re.search("ur\d{7}", u["href"]).group(0) },
-                              "rating": r_soup.find("span").text}
+                              "rating": float(r_soup.find("span").text)}
                 reviews.append(new_rating)
 
 
