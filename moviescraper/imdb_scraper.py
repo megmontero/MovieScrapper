@@ -26,12 +26,13 @@ class IMDBScraper():
         self._movie_reviews_endpoint = '/title/{}/reviews'
         self._movie_endpoint = '/title/{}'
         self._person_endpoint = '/name/{}/?nmdp=1&ref_=nm_flmg_shw_1#filmography'
+        self._user_endpoint = '/user/{}/ratings'
         self._user_agent_generator = IMDBAgentGenerator()
         self._archiver = IMDBStorageManager()
         self._extractor = IMDBMovieExtractor(self._base_url)
 
         self._crawler = IMDBCrawler(self._base_url,self._movie_endpoint,self._movie_rating_endpoint,
-                                    self._person_endpoint, self._movie_reviews_endpoint)
+                                    self._person_endpoint, self._movie_reviews_endpoint, self._user_endpoint)
         
     def _get_movies(self, endpoint):
         url = self._base_url + endpoint
@@ -43,7 +44,7 @@ class IMDBScraper():
             for movie_id in movie_list:
                 movie_page = self._crawler.get_movie_page(movie_id)
                 rating_movie_page = self._crawler.get_movie_rating_page(movie_id)
-
+                print(movie_id)
                 reviews_page = self._crawler.get_movie_reviews_page(movie_id)
                 movie_info = self._extractor.get_movie_info(movie_page, rating_movie_page, reviews_page)
                 # Iterate over all actors / creators / directors
@@ -80,6 +81,28 @@ class IMDBScraper():
                         if director_page is not None:
                             director_info = self._extractor.get_person_info(director_page)
                             self._archiver.write(director_info, collection='persons')
+                # Iterate over users reviews
+                try:
+                    reviews_list = movie_info['reviews']
+                except KeyError:
+                    reviews_list = []
+                for review in reviews_list:
+                    user_id = review["user"]["id"]
+                    print(user_id)
+                    if not self._archiver.exists_id(user_id, collection='users'):
+                        url_user = self._base_url + self._user_endpoint.format(user_id)
+                        user_page = self._crawler.get_user_page(url_user)
+                        if user_page is not None:
+                            user_info  = self._extractor.get_user_info(user_page)
+                            user_aux, next_user_page = self._extractor.get_user_ratings(user_page)
+                            user_info["ratings"]+=user_aux
+                            while(next_user_page):
+                                user_aux, next_user_page = self._extractor.get_user_ratings(user_page)
+                                user_info["ratings"]+=user_aux
+                            self._archiver.write(user_info, collection='users')
+                    if (not self._archiver.is_movie_rated(movie_info, user_id)):
+                        self._archiver.add_user_rate(movie_info, user_id)
+
 
                 # STUB!!! DEBUG!! UNCOMMENT!!
                 self._archiver.write(movie_info)
