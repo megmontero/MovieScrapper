@@ -15,7 +15,6 @@ class IMDBCrawler():
     def __init__(self, url, movie_endpoint, movie_rating_endpoint, person_endpoint, 
                 movie_reviews_endpoint, user_endpoint):
 
-
         self._base_url = url
         self._sleep_min = 1
         self._sleep_max = 2
