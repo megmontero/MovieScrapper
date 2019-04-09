@@ -33,6 +33,7 @@ class IMDBScraper():
 
         self._crawler = IMDBCrawler(self._base_url,self._movie_endpoint,self._movie_rating_endpoint,
                                     self._person_endpoint, self._movie_reviews_endpoint, self._user_endpoint)
+
         
     def _get_movies(self, endpoint):
         url = self._base_url + endpoint
@@ -44,7 +45,6 @@ class IMDBScraper():
             for movie_id in movie_list:
                 movie_page = self._crawler.get_movie_page(movie_id)
                 rating_movie_page = self._crawler.get_movie_rating_page(movie_id)
-                print(movie_id)
                 reviews_page = self._crawler.get_movie_reviews_page(movie_id)
                 movie_info = self._extractor.get_movie_info(movie_page, rating_movie_page, reviews_page)
                 # Iterate over all actors / creators / directors
@@ -81,6 +81,7 @@ class IMDBScraper():
                         if director_page is not None:
                             director_info = self._extractor.get_person_info(director_page)
                             self._archiver.write(director_info, collection='persons')
+
                 # Iterate over users reviews
                 try:
                     reviews_list = movie_info['reviews']

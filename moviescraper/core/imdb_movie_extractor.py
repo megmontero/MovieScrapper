@@ -158,6 +158,7 @@ class IMDBMovieExtractor():
 
         return person_info
 
+
     def get_user_info(self, user_page):
         """
         Extracts info of the user from user page passed by parameter
@@ -191,4 +192,5 @@ class IMDBMovieExtractor():
         next_page = None
 
         return user_ratings, next_page
+
 
