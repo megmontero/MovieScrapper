@@ -11,11 +11,15 @@ class IMDBCrawler():
     """
     IMDBCrawler class
     """
-    def __init__(self, url, movie_endpoint, movie_rating_endpoint, person_endpoint, movie_reviews_endpoint):
+
+    def __init__(self, url, movie_endpoint, movie_rating_endpoint, person_endpoint, 
+                movie_reviews_endpoint, user_endpoint):
+
 
         self._base_url = url
         self._sleep_min = 1
         self._sleep_max = 2
+        self._request_per_second = 5 # Set to 1 or less if you want to do 1 or less request per second 
         self._user_agent_generator = IMDBAgentGenerator()
         self._movie_endpoint = movie_endpoint
         self._movie_rating_endpoint = movie_rating_endpoint 
@@ -47,6 +51,10 @@ class IMDBCrawler():
         """
         Sleeps random seconds so we don't get banned :)
         """
+        if self._request_per_second > 1:
+            if random.randint(0, self._request_per_second)%self._request_per_second == 0:
+                time.sleep(1)
+            return
         seconds = random.randint(self._sleep_min, self._sleep_max)
         time.sleep(seconds)
     
@@ -103,3 +111,8 @@ class IMDBCrawler():
         url = self._base_url + self._movie_reviews_endpoint.format(movie_id)
         html, _ =  self._http_get_infinite_scroll(url, "load-more-data")
         return html
+    
+    def get_user_page(self, url):
+        page = self._http_get(url)
+        return page
+
