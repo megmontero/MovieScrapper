@@ -11,6 +11,7 @@ class IMDBCrawler():
     """
     IMDBCrawler class
     """
+
     def __init__(self, url, movie_endpoint, movie_rating_endpoint, person_endpoint, 
                 movie_reviews_endpoint, user_endpoint):
 

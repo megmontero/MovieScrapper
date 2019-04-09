@@ -192,3 +192,38 @@ class IMDBMovieExtractor():
 
         return user_ratings, next_page
 
+    def get_user_info(self, user_page):
+        """
+        Extracts info of the user from user page passed by parameter
+        """
+        user_info = {} 
+        user_info["ratings"] = []
+        soup = BeautifulSoup(user_page , "html.parser")
+        user_info["id"] = soup.find("div", {"id": "main"})["data-userid"]
+        header = soup.find("h1", {"class": "header"}).text
+        user_info["name"] = header.split("'")[0]
+        return user_info
+
+    def get_user_ratings(self, user_page):
+        """
+        Extracts info of the rating from user page passed by parameter
+        """
+        user_ratings =  []
+        soup = BeautifulSoup(user_page , "html.parser")
+        
+        items = soup.findAll("div", {"class":"lister-item"})
+        for it in items:
+            starts = it.findAll("span", {"class": "ipl-rating-star__rating"})
+            movie = it.find("a", href=True)
+            rate = {"global": float(starts[0].text),
+                "rate": int(starts[1].text),
+                "movie":{ "id": re.search("tt\d{7}", movie["href"]).group(0),
+                    "title": movie.text}
+                }
+            user_ratings.append(rate)
+
+        next_page = None
+
+        return user_ratings, next_page
+
+
