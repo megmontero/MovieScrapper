@@ -12,7 +12,10 @@ from core.imdb_agent_generator import IMDBAgentGenerator
 from core.imdb_movie_extractor import IMDBMovieExtractor
 from core.imdb_crawler import IMDBCrawler
 from core.imdb_storage_manager import IMDBStorageManager
+from utils.progress_bar import ProgressBar
+
 import datetime
+
 
 class IMDBScraper():
     """
@@ -30,13 +33,24 @@ class IMDBScraper():
         self._user_agent_generator = IMDBAgentGenerator()
         self._archiver = IMDBStorageManager()
         self._extractor = IMDBMovieExtractor(self._base_url)
-
+        self._total_item = 0
+        self._current_item = 0
         self._crawler = IMDBCrawler(self._base_url,self._movie_endpoint,self._movie_rating_endpoint,
                                     self._person_endpoint, self._movie_reviews_endpoint, self._user_endpoint)
+        self.progress_bar = ProgressBar(self.get_total, self.get_current, mode='bar')
+
+    def get_total(self):
+        return self._total_item
+
+    def get_current(self):
+        return self._current_item
 
     def _get_movies(self, endpoint):
         url = self._base_url + endpoint
         # TODO: Complete implementation
+        # We get total of movies to scrap:
+        first_page = self._crawler.get_movie_list_page(url)
+        self._total_item = self._extractor.get_total_movies(first_page)
         next_page_url = url
         while next_page_url is not None:
             list_page = self._crawler.get_movie_list_page(next_page_url)
@@ -130,6 +144,8 @@ class IMDBScraper():
                 # STUB!!! DEBUG!! UNCOMMENT!!
                 self._archiver.write(movie_info)
                 #self._archiver.write(movie_url)
+                self._current_item += 1
+
 
     def _get_movies_full(self):
         """
