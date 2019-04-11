@@ -28,8 +28,17 @@ El objetivo de usar una BBDD documental es, por un lado, huir de la rigidez de u
 - **Users**: Colección de usuarios con los ratings que han realizado de películas. 
 - **Persons**: Colección de personas y las películas en las que han participado con distintos roles. 
 
+## Ejemplos de documentos
 
-## Estructura
+En la carpeta html se encuentra una página web que usando Beautiful-Collapsible-JSON-Viewer muestra un ejemplo de cada documento. Dejamos una captura de cada documento: 
+
+![Ejemplo Movie](images/json_movie.png?raw=true "Title")
+
+![Ejemplo Person](images/json_person.png?raw=true "Title")
+
+
+![Ejemplo User](images/json_user.png?raw=true "Title")
+
 
 # Instalación
 
