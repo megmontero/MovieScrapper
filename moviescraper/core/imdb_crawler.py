@@ -7,6 +7,8 @@ import time
 from .imdb_agent_generator import IMDBAgentGenerator
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+
+
 class IMDBCrawler():
     """
     IMDBCrawler class
@@ -24,7 +26,7 @@ class IMDBCrawler():
         self._movie_rating_endpoint = movie_rating_endpoint 
         self._person_endpoint = person_endpoint
         self._movie_reviews_endpoint = movie_reviews_endpoint 
-  
+        """
         CHROME_PATH = '/usr/bin/google-chrome-stable'
         CHROMEDRIVER_PATH = 'drivers/chromedriver'
         WINDOW_SIZE = "1920,1080"
@@ -37,7 +39,7 @@ class IMDBCrawler():
         self._driver = webdriver.Chrome(executable_path=CHROMEDRIVER_PATH,
                           chrome_options=chrome_options
                          )
-
+        """
         
         
     def _get_agent(self):

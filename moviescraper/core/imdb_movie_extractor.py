@@ -34,7 +34,8 @@ class IMDBMovieExtractor():
         for k in remove_keys:
             movie_info.pop(k, None)
         movie_info["rating"]=  self._get_movie_rating_info(movie_rating_page)
-        movie_info["reviews"] = self._get_movie_reviews_info(movie_reviews_page)
+        # STUB!!
+        #movie_info["reviews"] = self._get_movie_reviews_info(movie_reviews_page)
 
         return movie_info
    
@@ -72,6 +73,16 @@ class IMDBMovieExtractor():
             movie_ids.append(movie_id)
         return (movie_ids, next_page)
 
+    def get_total_movies(self, list_page):
+        """
+        Extracts the total number of movies of the page
+        """
+        soup = BeautifulSoup(list_page, 'html.parser')
+        page_desc = soup.find_all(class_='desc')[0]
+        # text is in the format "1-50 of 11,250 titles."
+        total_text = (page_desc.find('span').text).split()[2].replace(',', '')
+        total_number = int(total_text)
+        return total_number
 
     def _get_movie_reviews_info(self, movie_reviews_page):
         """
