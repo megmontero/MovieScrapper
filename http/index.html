@@ -1,0 +1,559 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Modelo de datos IMDB Scrapper</title>
+    <link rel="stylesheet" type="text/css" href="stylesheets/demo.css">
+    <link href="stylesheets/jsonpanel.css" rel="stylesheet" type="text/css">
+   <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="bower_components/Autolinker.js/dist/Autolinker.js"></script>
+    <script src="jsonpanel.js" data-cover></script>
+    <script>
+        $(document).on('ready', function(){
+
+          $('#json1').jsonpanel({
+            data: 
+{
+  "@type": "Movie",
+  "name": "The Haunting of Sharon Tate",
+  "genre": [
+    "Drama",
+    "Horror",
+    "Thriller"
+  ],
+  "contentRating": "R",
+  "description": "The Haunting of Sharon Tate is a movie starring Hilary Duff, Jonathan Bennett, and Lydia Hearst. Pregnant with director Roman Polanski's child and awaiting his return from Europe, 26-year-old Hollywood actress Sharon Tate becomes...",
+  "datePublished": "2019-04-05",
+  "keywords": "actress,year 1969,killer,charles manson,mass murder",
+  "duration": "PT1H34M",
+  "title": "The Haunting of Sharon Tate",
+  "year": 2019,
+  "id": "tt7976208",
+  "actors": [
+    {
+      "name": "Hilary Duff",
+      "id": "nm0240381"
+    },
+    {
+      "name": "Jonathan Bennett",
+      "id": "nm1057932"
+    },
+    {
+      "name": "Lydia Hearst",
+      "id": "nm1935905"
+    },
+    {
+      "name": "Pawel Szajda",
+      "id": "nm1437733"
+    }
+  ],
+  "creators": [
+    {
+      "name": "Daniel Farrands",
+      "id": "nm0268107"
+    }
+  ],
+  "directors": [
+    {
+      "name": "Daniel Farrands",
+      "id": "nm0268107"
+    }
+  ],
+  "rating": [
+    {
+      "group": "all",
+      "rating": 3.1,
+      "votes": 279
+    },
+    {
+      "group": "<18",
+      "rating": 1.5,
+      "votes": 2
+    },
+    {
+      "group": "18-29",
+      "rating": 3.3,
+      "votes": 57
+    },
+    {
+      "group": "30-44",
+      "rating": 3.1,
+      "votes": 81
+    },
+    {
+      "group": "45+",
+      "rating": 3.2,
+      "votes": 59
+    },
+    {
+      "group": "males",
+      "rating": 3,
+      "votes": 171
+    },
+    {
+      "group": "m<18",
+      "rating": 1,
+      "votes": 1
+    },
+    {
+      "group": "m18-29",
+      "rating": 3.4,
+      "votes": 44
+    },
+    {
+      "group": "m30-44",
+      "rating": 3,
+      "votes": 66
+    },
+    {
+      "group": "m45+",
+      "rating": 3.1,
+      "votes": 48
+    },
+    {
+      "group": "females",
+      "rating": 3.3,
+      "votes": 39
+    },
+    {
+      "group": "f<18",
+      "rating": 2,
+      "votes": 1
+    },
+    {
+      "group": "f18-29",
+      "rating": 3,
+      "votes": 11
+    },
+    {
+      "group": "f30-44",
+      "rating": 3.8,
+      "votes": 12
+    },
+    {
+      "group": "f45+",
+      "rating": 4,
+      "votes": 11
+    }
+  ],
+  "reviews": [
+    {
+      "user": {
+        "name": "incredingo-37769",
+        "id": "ur7380488"
+      },
+      "rating": 3
+    },
+    {
+      "user": {
+        "name": "danocaster",
+        "id": "ur5345394"
+      },
+      "rating": 3
+    },
+    {
+      "user": {
+        "name": "lizshotter-19401",
+        "id": "ur9523158"
+      },
+      "rating": 3
+    },
+    {
+      "user": {
+        "name": "iix-31422",
+        "id": "ur6849855"
+      },
+      "rating": 3
+    },
+    {
+      "user": {
+        "name": "jeffkragh",
+        "id": "ur3562196"
+      },
+      "rating": 3
+    },
+    {
+      "user": {
+        "name": "dcharold",
+        "id": "ur1005139"
+      },
+      "rating": 3
+    },
+    {
+      "user": {
+        "name": "charvelstrat81",
+        "id": "ur5441333"
+      },
+      "rating": 3
+    },
+    {
+      "user": {
+        "name": "SteverB",
+        "id": "ur0004876"
+      },
+      "rating": 3
+    },
+    {
+      "user": {
+        "name": "fyrestormproductions",
+        "id": "ur4830588"
+      },
+      "rating": 3
+    },
+    {
+      "user": {
+        "name": "woodslasher",
+        "id": "ur1760730"
+      },
+      "rating": 3
+    },
+    {
+      "user": {
+        "name": "billyelevator",
+        "id": "ur6495922"
+      },
+      "rating": 3
+    },
+    {
+      "user": {
+        "name": "jonathanhughes-38718",
+        "id": "ur9407824"
+      },
+      "rating": 3
+    },
+    {
+      "user": {
+        "name": "zendytrendy-43244",
+        "id": "ur1001794"
+      },
+      "rating": 3
+    },
+    {
+      "user": {
+        "name": "robertcarey-03126",
+        "id": "ur7932131"
+      },
+      "rating": 3
+    },
+    {
+      "user": {
+        "name": "salviolog",
+        "id": "ur3320492"
+      },
+      "rating": 3
+    }
+  ],
+  "__id": 0
+}
+            
+          });
+
+
+
+/*JSON 2*/
+
+
+          $('#json2').jsonpanel({
+            data: 
+{
+  "id": "nm0230826",
+  "name": "Monica Dolan",
+  "birth_date": "1969-03-15",
+  "Actress": [
+    {
+      "name": "National Theatre Live: All About Eve",
+      "id": "tt9652730"
+    },
+    {
+      "name": "Rialto",
+      "id": "tt8818842"
+    },
+    {
+      "name": "Official Secrets",
+      "id": "tt5431890"
+    },
+    {
+      "name": "Hang Ups",
+      "id": "tt7411444"
+    },
+    {
+      "name": "Un escandalo muy inglés",
+      "id": "tt6938856"
+    },
+    {
+      "name": "W1A",
+      "id": "tt3610926"
+    },
+    {
+      "name": "Cormoran Strike",
+      "id": "tt4276618"
+    },
+    {
+      "name": "Crimen en el paraíso",
+      "id": "tt1888075"
+    },
+    {
+      "name": "Historias probables de Neil Gaiman",
+      "id": "tt5182786"
+    },
+    {
+      "name": "Espíadas desde el cielo",
+      "id": "tt2057392"
+    },
+    {
+      "name": "Wolf Hall",
+      "id": "tt3556920"
+    },
+    {
+      "name": "Pride",
+      "id": "tt3169706"
+    },
+    {
+      "name": "Vice of Mind",
+      "id": "tt2916872"
+    },
+    {
+      "name": "Out of Darkness",
+      "id": "tt3071046"
+    },
+    {
+      "name": "Alan Partridge: Alpha Papa",
+      "id": "tt0469021"
+    },
+    {
+      "name": "Complicit",
+      "id": "tt2224119"
+    },
+    {
+      "name": "Coming Up",
+      "id": "tt0406404"
+    },
+    {
+      "name": "Meconium",
+      "id": "tt1987607"
+    },
+    {
+      "name": "DCI Banks",
+      "id": "tt1652216"
+    },
+    {
+      "name": "Nunca me abandones",
+      "id": "tt1334260"
+    },
+    {
+      "name": "Los asesinatos de Midsomer",
+      "id": "tt0118401"
+    },
+    {
+      "name": "Within the Whirlwind",
+      "id": "tt1142804"
+    },
+    {
+      "name": "King Lear",
+      "id": "tt2049483"
+    },
+    {
+      "name": "Hope",
+      "id": "tt1093367"
+    },
+    {
+      "name": "The Commander: Blacklight",
+      "id": "tt0494673"
+    },
+    {
+      "name": "Agatha Christie: Poirot",
+      "id": "tt0094525"
+    },
+    {
+      "name": "She Stoops to Conquer",
+      "id": "tt0427851"
+    },
+    {
+      "name": "Dalziel and Pascoe",
+      "id": "tt0147760"
+    },
+    {
+      "name": "Topsy-Turvy",
+      "id": "tt0151568"
+    },
+    {
+      "name": "Policía de barrio",
+      "id": "tt0084987"
+    },
+    {
+      "name": "Days of the Bagnold Summer",
+      "id": "tt7343740"
+    },
+    {
+      "name": "Mitos urbanos",
+      "id": "tt6413094"
+    },
+    {
+      "name": "Vanity Fair",
+      "id": "tt7076630"
+    },
+    {
+      "name": "God's Own County",
+      "id": "tt10130054"
+    },
+    {
+      "name": "Inside No. 9",
+      "id": "tt2674806"
+    },
+    {
+      "name": "Helecho",
+      "id": "tt7126546"
+    },
+    {
+      "name": "Catastrophe",
+      "id": "tt4374208"
+    },
+    {
+      "name": "Testigo de cargo",
+      "id": "tt5834256"
+    },
+    {
+      "name": "Mid Morning Matters with Alan Partridge",
+      "id": "tt1923623"
+    },
+    {
+      "name": "Una vacante imprevista",
+      "id": "tt2554946"
+    },
+    {
+      "name": "The Falling",
+      "id": "tt3294200"
+    },
+    {
+      "name": "Twelve",
+      "id": "tt3073644"
+    },
+    {
+      "name": "Abogado y asesino",
+      "id": "tt2649522"
+    },
+    {
+      "name": "Kick Ass 2: Con un par",
+      "id": "tt1650554"
+    },
+    {
+      "name": "Bed Trick",
+      "id": "tt3029618"
+    },
+    {
+      "name": "¡Llama a la comadrona!",
+      "id": "tt1983079"
+    },
+    {
+      "name": "Turistas",
+      "id": "tt2023690"
+    },
+    {
+      "name": "Appropriate Adult",
+      "id": "tt1831575"
+    },
+    {
+      "name": "Excluded",
+      "id": "tt1726632"
+    },
+    {
+      "name": "The Arbor",
+      "id": "tt1623008"
+    },
+    {
+      "name": "U Be Dead",
+      "id": "tt1243617"
+    },
+    {
+      "name": "Occupation",
+      "id": "tt1253869"
+    },
+    {
+      "name": "Great Performances",
+      "id": "tt0159876"
+    },
+    {
+      "name": "The History of Mr Polly",
+      "id": "tt0884763"
+    },
+    {
+      "name": "Wallis & Edward",
+      "id": "tt0451265"
+    },
+    {
+      "name": "Guernsey",
+      "id": "tt0428608"
+    },
+    {
+      "name": "Tipping the Velvet",
+      "id": "tt0324264"
+    },
+    {
+      "name": "Judge John Deed",
+      "id": "tt0302128"
+    },
+    {
+      "name": "The Gift",
+      "id": "tt0150727"
+    },
+    {
+      "name": "Un sueño en una noche de verano",
+      "id": "tt0117043"
+    }
+  ],
+  "Self": [
+    {
+      "name": "Sunday Brunch",
+      "id": "tt2326935"
+    },
+    {
+      "name": "Breakfast",
+      "id": "tt0262152"
+    }
+  ],
+  "Archive footage": [
+    {
+      "name": "Cormoran Strike",
+      "id": "tt4276618"
+    }
+  ]
+}
+});
+//JSON 3
+          $('#json3').jsonpanel({
+            data: 
+ {"id": "ur9273283",
+  "name": "Tejas_Vinda_AITS",
+  "ratings": [{"global": 7.5,
+    "rate": 7,
+    "movie": {"id": "tt5279674", "title": "No Fathers in Kashmir"}}]}
+	  });
+        });
+    </script>
+  </head>
+  <body>
+    <h1>Modelo de datos IMDB Scrapper</h1>
+    <h1>Ejemplo documento colección <i>Movie</i> </h1>
+    <div class="jsonpanel" id="json1"></div>
+    <h1>Ejemplo documento colección <i>Persons</i> </h1>
+    <div class="jsonpanel" id="json2"></div>
+    <h1>Ejemplo documento colección <i>Users</i> </h1>
+    <div class="jsonpanel" id="json3"></div>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-36251023-1']);
+  _gaq.push(['_setDomainName', 'jqueryscript.net']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+  </body>
+</html>
