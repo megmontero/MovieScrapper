@@ -35,7 +35,7 @@ class IMDBMovieExtractor():
             movie_info.pop(k, None)
         movie_info["rating"]=  self._get_movie_rating_info(movie_rating_page)
         # STUB!!
-        #movie_info["reviews"] = self._get_movie_reviews_info(movie_reviews_page)
+        movie_info["reviews"] = self._get_movie_reviews_info(movie_reviews_page)
 
         return movie_info
    
@@ -229,8 +229,9 @@ class IMDBMovieExtractor():
             rate = {"global": float(starts[0].text),
                 "rate": int(starts[1].text),
                 "movie":{ "id": re.search("tt\d{7}", movie["href"]).group(0),
-                    "title": movie.text}
+                    "title": movie.find("img")["alt"]}
                 }
+            break
             user_ratings.append(rate)
 
         next_page = None

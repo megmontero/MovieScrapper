@@ -102,7 +102,6 @@ class IMDBScraper():
                     reviews_list = []
                 for review in reviews_list:
                     user_id = review["user"]["id"]
-                    print(user_id)
                     if not self._archiver.exists_id(user_id, collection='users'):
                         url_user = self._base_url + self._user_endpoint.format(user_id)
                         user_page = self._crawler.get_user_page(url_user)
@@ -116,31 +115,6 @@ class IMDBScraper():
                             self._archiver.write(user_info, collection='users')
                     if (not self._archiver.is_movie_rated(movie_info, user_id)):
                         self._archiver.add_user_rate(movie_info, user_id)
-
-
-                # Iterate over users reviews
-                try:
-                    reviews_list = movie_info['reviews']
-                except KeyError:
-                    reviews_list = []
-                for review in reviews_list:
-                    user_id = review["user"]["id"]
-                    print(user_id)
-                    if not self._archiver.exists_id(user_id, collection='users'):
-                        url_user = self._base_url + self._user_endpoint.format(user_id)
-                        user_page = self._crawler.get_user_page(url_user)
-                        if user_page is not None:
-                            user_info  = self._extractor.get_user_info(user_page)
-                            user_aux, next_user_page = self._extractor.get_user_ratings(user_page)
-                            user_info["ratings"]+=user_aux
-                            while(next_user_page):
-                                user_aux, next_user_page = self._extractor.get_user_ratings(user_page)
-                                user_info["ratings"]+=user_aux
-                            self._archiver.write(user_info, collection='users')
-                    if (not self._archiver.is_movie_rated(movie_info, user_id)):
-                        self._archiver.add_user_rate(movie_info, user_id)
-
-
                 # STUB!!! DEBUG!! UNCOMMENT!!
                 self._archiver.write(movie_info)
                 #self._archiver.write(movie_url)
