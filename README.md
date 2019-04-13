@@ -42,6 +42,30 @@ En la carpeta html se encuentra una página web que usando Beautiful-Collapsible
 
 # Instalación
 
+Primero, hay que descargar el proyecto de este repositorio, bien usando la opción _Descargar_ de Github o usando git:
+
+`git clone https://github.com/megmontero/MovieScrapper.git`
 
 
+En el directorio raíz, el fichero _requirements.txt_ contiene todos los módulos de Python adicionales para que el scraper funcione. Usando pip instalará dichos módulos:
+
+`pip install -r requirements.txt`
+
+Uno de los módulos utilizados es selenium para poder realizar el scraping dinámico dentro de IMDB de secciones que no permiten la paginación estática.
+Usamos _Google Chrome_ para realizar dicho scraping dinámico. Por lo tanto hay que configurar el scraper para que pueda encontrar la ruta del ejecutable de Google Chrome y la ruta del driver de Selenium para Chrome.
+
+Primero descargamos el driver desde la web: https://sites.google.com/a/chromium.org/chromedriver/downloads y lo dejamos en la ruta que queramos.
+
+Una vez instalado, hay que indicar las rutas al scraper. Para ello, modificar el fichero selenium.cfg:
+
+## _selenium.cfg_
+
+> # Chrome executable path
+> self._CHROME_PATH = '/usr/bin/google-chrome-stable'
+> # Chrome web driver path
+> self._CHROMEDRIVER_PATH = 'drivers/chromedriver'
+
+Ahora, ya podemos ejecutar el scraper de la siguiente forma desde el directorio _moviescraper_:
+
+python imdb_scraper.py
 

@@ -27,20 +27,27 @@ class IMDBCrawler():
         self._person_endpoint = person_endpoint
         self._movie_reviews_endpoint = movie_reviews_endpoint 
         
-        CHROME_PATH = '/usr/bin/google-chrome-stable'
-        CHROMEDRIVER_PATH = 'drivers/chromedriver'
-        WINDOW_SIZE = "1920,1080"
-
+        #self._CHROME_PATH = '/usr/bin/google-chrome-stable'
+        # self._CHROMEDRIVER_PATH = 'drivers/chromedriver'
+        self._read_config()
+        self._WINDOW_SIZE = "1920,1080"
+        
         chrome_options = Options()
         chrome_options.add_argument("--headless")
-        chrome_options.add_argument("--window-size=%s" % WINDOW_SIZE)
-        chrome_options.binary_location = CHROME_PATH
+        chrome_options.add_argument("--window-size=%s" % self._WINDOW_SIZE)
+        chrome_options.binary = self._CHROME_PATH
 
-        self._driver = webdriver.Chrome(executable_path=CHROMEDRIVER_PATH,
+        self._driver = webdriver.Chrome(executable_path=self._CHROMEDRIVER_PATH,
                           chrome_options=chrome_options
                          )
        
-        
+    def _read_config(self, driver='chrome'):
+        config_file = open('./selenium.cfg', 'r')
+        comment = config_file.readline()
+        self._CHROME_PATH = config_file.readline()
+        comment = config_file.readline()
+        self._CHROMEDRIVER_PATH = config_file.readline()
+        config_file.close()
         
     def _get_agent(self):
         """
