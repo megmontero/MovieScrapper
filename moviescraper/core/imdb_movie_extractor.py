@@ -17,7 +17,7 @@ class IMDBMovieExtractor():
         
         movie_info = json.loads(soup.find('script', type='application/ld+json').text)
         titleyear = (soup.select('h1')[0].text.strip()).split("\xa0")
-        movie_info["title"] = titleyear[0]
+        movie_info["title"] = movie_info["name"]#titleyear[0] Spanish title
         if len(titleyear)>1:
             movie_info["year"] = int(titleyear[1].strip('()'))
         movie_info["id"]= soup.find("meta",  property="pageId")["content"]
@@ -30,7 +30,7 @@ class IMDBMovieExtractor():
             movie_info["directors"] = self.extract_person_list(movie_info["director"])
         
         remove_keys = ["@context", "image", "url", "aggregateRating", 
-                       "review", "trailer", "actor", "creator", "director"]
+                       "review", "trailer", "actor", "creator", "director", "name"]
         for k in remove_keys:
             movie_info.pop(k, None)
         movie_info["rating"]=  self._get_movie_rating_info(movie_rating_page)

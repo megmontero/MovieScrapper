@@ -35,11 +35,14 @@ class IMDBScraper():
         self._extractor = IMDBMovieExtractor(self._base_url)
         self._total_item = 0
         self._current_item = 0
+        self._limit=100
         self._crawler = IMDBCrawler(self._base_url,self._movie_endpoint,self._movie_rating_endpoint,
                                     self._person_endpoint, self._movie_reviews_endpoint, self._user_endpoint)
         self.progress_bar = ProgressBar(self.get_total, self.get_current, mode='bar')
 
     def get_total(self):
+        if (self._limit < self._total_item):
+            return self._limit
         return self._total_item
 
     def get_current(self):
@@ -119,6 +122,8 @@ class IMDBScraper():
                 self._archiver.write(movie_info)
                 #self._archiver.write(movie_url)
                 self._current_item += 1
+                if(self._current_item == self._limit):
+                    return
 
 
     def _get_movies_full(self):
@@ -129,8 +134,7 @@ class IMDBScraper():
         end_date = datetime.datetime.today().strftime('%Y-%m-%d')
         endpoint = '/search/title?title_type=feature&year=1894-01-01' + ',' + end_date
         ## DEBUG less time to test better
-
-        endpoint = '/search/title?title_type=feature&year=2019-04-05' + ',' + end_date
+        endpoint = '/search/title?title_type=feature&year=2018-01-01' + ',' + end_date + "&sort=num_votes,desc"
         self._get_movies(endpoint)
         
     def _get_movies_year(self, int):
