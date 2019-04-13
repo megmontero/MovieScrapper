@@ -81,7 +81,7 @@ class IMDBCrawler():
         html = self._driver.page_source.encode('utf-8')
         page_num = 0
         while self._driver.find_elements_by_class_name(load_class):
-            self._sleep()
+            #self._sleep()
             try:
                 self._driver.find_elements_by_class_name(load_class)[0].click()
             except: 
