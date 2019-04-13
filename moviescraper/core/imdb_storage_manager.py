@@ -1,6 +1,7 @@
 """
 IMDBStorageManager
 """
+CSV=True
 
 from unqlite import UnQLite
 class IMDBStorageManager():
@@ -17,6 +18,40 @@ class IMDBStorageManager():
             col.create()
             col.store(doc)
             self._db.commit()
+        if CSV:
+            switcher = {
+                "users": "write_csv_user" ,
+                "movies": "write_csv_movie",
+                "persons": "write_csv_person"
+            }
+            func = switcher.get(argument, lambda: "")
+            func(doc, collection)
+
+
+
+    ##TODO 
+    def _write_csv_row(self, file_name,row, mode="a"):
+        f = open("dataset/"+ file_name, mode)
+        f.write(";".join(row))
+        f.close()
+
+    def write_csv_movie(self, doc, collection):
+        print (doc)
+        movie_row = []
+        file_name = collection + ".csv"
+        for k in doc.keys():
+            movie_row.append(doc[k])
+        self._write_csv_row(file_name, movie_row)
+
+    def write_csv_user(self, doc, collection):
+        return
+
+    def write_csv_person(self, doc, collection):
+        return
+
+
+
+
 
     """
     Check if ID exists
@@ -80,5 +115,4 @@ class IMDBStorageManager():
         user["ratings"].append(new_rate)
         col.update(user["__id"], user)
         self._db.commit()
-
 
