@@ -62,9 +62,11 @@ Una vez instalado, hay que indicar las rutas al scraper. Para ello, modificar el
 
 ### Chrome executable path
 Ejemplo Windows:
-  C:/Program Files (x86)/Google/Chrome/Application/chrome.exe
+
+>> C:/Program Files (x86)/Google/Chrome/Application/chrome.exe
+
 Ejemplo Linux: 
-  /usr/bin/google-chrome-stable
+>> /usr/bin/google-chrome-stable
 
 ### Chrome web driver path
 drivers/chromedriver.exe
