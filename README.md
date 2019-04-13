@@ -39,6 +39,18 @@ En la carpeta html se encuentra una página web que usando Beautiful-Collapsible
 
 ![Ejemplo User](images/json_user.png?raw=true "Title")
 
+## Dataset en csv
+En la carpeta "dataset/" podemos encontrar una muestra del dataset en formato csv; en este caso, al no tener la flexibilidad de una BBDD documental, nos hemos adaptado a un modelo relacional. Los ficheros disponibles, cada uno con su cabecera son: 
+
+- **movies.csv**: Fichero que contiene información de películas.
+- **persons.csv**: Fichero con información de personas que de diferente forma van a participar en las películas.
+- **users.csv**: Usuarios de IMDB que han puntuado alguna película.
+- **person_movie**: Fichero con relaciones entre personas y peliculas, especificando en rol que realiza en las mismas.
+- **user_movie**: Fichero con relaciones entre usuarios y películas, especificando la puntuación dada por cada usuario.
+
+
+La muestra que podemos encontrar en "dataset/" contiene las 100 películas de 2018 y 2019 más votadas por los usuarios. Al ser únicamente una muestra es posible que algunos ids de películas de los ficheros "user_movie.csv" y "person_movie" no se encuentren en las 100 películas extraídas del fichero "movies.csv."
+
 
 # Instalación
 
