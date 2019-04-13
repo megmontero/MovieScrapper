@@ -8,6 +8,7 @@ moviescraper/db/*
 
 #selenium driver
 moviescraper/drivers/*
-
+# generated dataset
+moviescraper/dataset/*
 
 !.keep
