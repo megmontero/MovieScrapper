@@ -60,10 +60,10 @@ Una vez instalado, hay que indicar las rutas al scraper. Para ello, modificar el
 
 ## _selenium.cfg_
 
-> Chrome executable path
-> C:/Program Files (x86)/Google/Chrome/Application/chrome.exe
-> Chrome web driver path
-> drivers/chromedriver.exe
+### Chrome executable path
+C:/Program Files (x86)/Google/Chrome/Application/chrome.exe
+### Chrome web driver path
+drivers/chromedriver.exe
 
 Ahora, ya podemos ejecutar el scraper de la siguiente forma desde el directorio _moviescraper_:
 
