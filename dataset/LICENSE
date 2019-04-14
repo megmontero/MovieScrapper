@@ -1,7 +1,7 @@
-En cuanto al licenciamiento del dataset, lo primero ha sido referirse al apartado de la propia la web que dice:
+En cuanto al licenciamiento del dataset, lo primero ha sido referirse al apartado de la propia web, que dice:
 
 https://help.imdb.com/article/imdb/general-information/can-i-use-imdb-data-in-my-software/G5JTRESSHJBBHTGX#
-
+---------------------------------------------------------------------------------------------------------------------------
 Can I use IMDb data in my software?
 Limited non-commercial use of IMDb data is allowed, provided the following conditions are met: 
 
@@ -19,6 +19,7 @@ We reserve the right to deny any individual request for any reason.
 
 Commercial use
 Looking for information on licensing IMDb content for commercial use? See here
+---------------------------------------------------------------------------------------------------------------------------
 
 Como nuestro uso es académico y no comercial, vamos a elegir una licencia abierta haciendo mención a IMDB tal y
 como especifica la web.
@@ -34,7 +35,7 @@ En el segundo caso, en el que nuestro dataset recae, el licenciamiento viene má
 Esto es: si nos limitamos a descargar una base de datos de forma prácticamente literal, podemos estar infrigiendo alguna ley respecto a lo indicado por el creado de los datos originales.
 Sin embargo, si nuestro dataset no es una copia exacta de los datos en cuanto a estructura y aporta algo más, el licenciamiento puede ser elegido acorde al origen de datos, pero dándole una licencia propia.
 
-En nuestro dataset no nos hemos limitado a descargar los datos de forma literal: hemos creado un dataset propia con tres visiones distintas que, si alguien se plantea hacer uso de los datos para un caso de uso concreto, la utilidad que este dataset aporta es única y no puede ser dada por los datos originales en la forma en la que están (dentro de la web de imdb).
+En nuestro dataset no nos hemos limitado a descargar los datos de forma literal: hemos creado un dataset propio con tres visiones distintas que, si alguien se plantea hacer uso de los datos para un caso de uso concreto, la utilidad que este dataset aporta es única y no puede ser dada por los datos originales en la forma en la que están (dentro de la web de imdb).
 Por lo tanto, elegimos una licencia de CDLA-Sharing-1.0, haciendo siempre mención a IMDB tal y como piden en su web:
 
 Community Data License Agreement – Sharing – Version 1.0
