@@ -1,7 +1,7 @@
 """
 Component for progress information
 """
-from os import system, name 
+from os import system, name
 from threading import Thread
 import time
 import math
@@ -18,21 +18,20 @@ class ProgressBar(Thread):
         self._delay = delay
         self._title = title
         self._total_width = 100
-        if mode=='text':
+        if mode == 'text':
             self._print_func = self._display_text
-        elif mode=='bar':
+        elif mode == 'bar':
             self._print_func = self._display_bar
         self._finished = False
         self.start()
 
-    def _clear(self): 
-        # for windows 
-        if name == 'nt': 
-            _ = system('cls') 
-      
-        # for mac and linux(here, os.name is 'posix') 
-        else: 
-            _ = system('clear') 
+    def _clear(self):
+        # for windows
+        if name == 'nt':
+            _ = system('cls')
+        # for mac and linux(here, os.name is 'posix')
+        else:
+            _ = system('clear')
 
     def _display_text(self, value):
         print('Current progress: {}'.format(value))
@@ -41,7 +40,8 @@ class ProgressBar(Thread):
         print('Current progress:')
         completed = math.floor(round(value))
         incompleted = self._total_width - completed
-        print('[' + '='*completed + ' '*incompleted + '] {}%'. format(round(value, 2)))
+        print('[' + '='*completed + ' '*incompleted +
+              '] {}%'. format(round(value, 2)))
 
     def run(self):
         while not self._finished:
@@ -57,4 +57,3 @@ class ProgressBar(Thread):
                 if (percentage_value == 100):
                     self._finished = True
             time.sleep(self._delay)
-            
