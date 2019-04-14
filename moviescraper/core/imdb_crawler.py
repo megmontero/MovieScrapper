@@ -44,9 +44,9 @@ class IMDBCrawler():
     def _read_config(self, driver='chrome'):
         config_file = open('./selenium.cfg', 'r')
         comment = config_file.readline()
-        self._CHROME_PATH = config_file.readline()
+        self._CHROME_PATH = config_file.readline().strip()
         comment = config_file.readline()
-        self._CHROMEDRIVER_PATH = config_file.readline()
+        self._CHROMEDRIVER_PATH = config_file.readline().strip()
         config_file.close()
         
     def _get_agent(self):

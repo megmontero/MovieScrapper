@@ -102,10 +102,17 @@ Ejemplo Windows:
 >> C:/Program Files (x86)/Google/Chrome/Application/chrome.exe
 
 Ejemplo Linux: 
+
 >> /usr/bin/google-chrome-stable
 
 ### Chrome web driver path
-drivers/chromedriver.exe
+Ejemplo Windows:
+
+>> drivers/chromedriver.exe
+
+Ejemplo Linux: 
+
+>> drivers/chromedriver
 
 Ahora, ya podemos ejecutar el scraper de la siguiente forma desde el directorio _moviescraper_:
 
