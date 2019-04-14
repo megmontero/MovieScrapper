@@ -17,7 +17,7 @@ El scrapping se ha realizado en Python, usando principalmente las siguientes lib
 - **Selenium**: Utilizado para extraer el código HTML y navegar en páginas dinámicas.
 - **Beautiful Soup**: Parser utilizado para extraer información del código HTML.
 
-Todo el código ha sido realizado siguiendo las normativas oficiales de estilo PEP8 (https://www.python.org/dev/peps/pep-0008/) y verificado usando el módulo _pycodestyle_ oficial para este propósito.
+Todo el código ha sido realizado siguiendo las normativas oficiales de estilo **PEP8** (https://www.python.org/dev/peps/pep-0008/) y verificado usando el módulo **_pycodestyle_** oficial para este propósito.
 
 # Índice repositorio 
 
