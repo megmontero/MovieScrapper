@@ -14,33 +14,35 @@ class IMDBCrawler():
     IMDBCrawler class
     """
 
-    def __init__(self, url, movie_endpoint, movie_rating_endpoint, person_endpoint, 
-                movie_reviews_endpoint, user_endpoint):
+    def __init__(self, url, movie_endpoint, movie_rating_endpoint,
+                 person_endpoint, movie_reviews_endpoint, user_endpoint):
 
         self._base_url = url
         self._sleep_min = 1
         self._sleep_max = 2
-        self._request_per_second = 5 # Set to 1 or less if you want to do 1 or less request per second 
+        # Set to 1 or less if you want to do 1 or less request per second
+        self._request_per_second = 5
         self._user_agent_generator = IMDBAgentGenerator()
         self._movie_endpoint = movie_endpoint
-        self._movie_rating_endpoint = movie_rating_endpoint 
+        self._movie_rating_endpoint = movie_rating_endpoint
         self._person_endpoint = person_endpoint
-        self._movie_reviews_endpoint = movie_reviews_endpoint 
-        
-        #self._CHROME_PATH = '/usr/bin/google-chrome-stable'
+        self._movie_reviews_endpoint = movie_reviews_endpoint
+
+        # self._CHROME_PATH = '/usr/bin/google-chrome-stable'
         # self._CHROMEDRIVER_PATH = 'drivers/chromedriver'
         self._read_config()
         self._WINDOW_SIZE = "1920,1080"
-        
+
         chrome_options = Options()
         chrome_options.add_argument("--headless")
         chrome_options.add_argument("--window-size=%s" % self._WINDOW_SIZE)
         chrome_options.binary = self._CHROME_PATH
 
-        self._driver = webdriver.Chrome(executable_path=self._CHROMEDRIVER_PATH,
+        self._driver = webdriver.Chrome(
+                          executable_path=self._CHROMEDRIVER_PATH,
                           chrome_options=chrome_options
                          )
-       
+
     def _read_config(self, driver='chrome'):
         config_file = open('./selenium.cfg', 'r')
         comment = config_file.readline()
@@ -48,24 +50,25 @@ class IMDBCrawler():
         comment = config_file.readline()
         self._CHROMEDRIVER_PATH = config_file.readline().strip()
         config_file.close()
-        
+
     def _get_agent(self):
         """
         Generates a new user agent to be user
         """
         return self._user_agent_generator.random_agent()
-    
+
     def _sleep(self):
         """
         Sleeps random seconds so we don't get banned :)
         """
         if self._request_per_second > 1:
-            if random.randint(0, self._request_per_second)%self._request_per_second == 0:
+            if random.randint(0, self._request_per_second) \
+                    % self._request_per_second == 0:
                 time.sleep(1)
             return
         seconds = random.randint(self._sleep_min, self._sleep_max)
         time.sleep(seconds)
-    
+
     def _http_get(self, url):
         """
         HTTP GET envelope
@@ -88,39 +91,40 @@ class IMDBCrawler():
         html = self._driver.page_source.encode('utf-8')
         page_num = 0
         while self._driver.find_elements_by_class_name(load_class):
-            #self._sleep()
+            # self._sleep()
             try:
                 self._driver.find_elements_by_class_name(load_class)[0].click()
-            except: 
+            except Exception:
                 return (html, page_num)
-                
+
             page_num += 1
         html = self._driver.page_source.encode('utf-8')
         return (html, page_num)
-        
-    
+
     def get_movie_page(self, movie_id):
-        page = self._http_get(self._base_url + self._movie_endpoint.format(movie_id))
+        page = self._http_get(self._base_url +
+                              self._movie_endpoint.format(movie_id))
         return page
 
     def get_movie_rating_page(self, movie_id):
-        page = self._http_get(self._base_url + self._movie_rating_endpoint.format(movie_id))
+        page = self._http_get(self._base_url +
+                              self._movie_rating_endpoint.format(movie_id))
         return page
-        
+
     def get_movie_list_page(self, url):
         page = self._http_get(url)
         return page
 
     def get_person_page(self, person_id):
-        page = self._http_get(self._base_url + self._person_endpoint.format(person_id))
+        page = self._http_get(self._base_url +
+                              self._person_endpoint.format(person_id))
         return page
 
     def get_movie_reviews_page(self, movie_id):
         url = self._base_url + self._movie_reviews_endpoint.format(movie_id)
-        html, _ =  self._http_get_infinite_scroll(url, "load-more-data")
+        html, _ = self._http_get_infinite_scroll(url, "load-more-data")
         return html
-    
+
     def get_user_page(self, url):
         page = self._http_get(url)
         return page
-
