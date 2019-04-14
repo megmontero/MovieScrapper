@@ -17,7 +17,31 @@ El scrapping se ha realizado en Python, usando principalmente las siguientes lib
 - **Selenium**: Utilizado para extraer el código HTML y navegar en páginas dinámicas.
 - **Beautiful Soup**: Parser utilizado para extraer información del código HTML.
 
+# Índice repositorio 
 
+El repositorio que presentamos está estructurado del siguiente modo: 
+
+- **dataset**: Dataset de ejemplo en *csv* con una extracción de las 100 películas más votadas en 2018 y 2019. Contiene la licencia que aplica al *dataset*.
+
+- **http**: Web con ejemplo de los documentos originales extraídos en *json* de las tres colecciones. 
+
+- **images**: Capturas de la web nombrada en el punto anterior. Se muestran en este mismo *Readme*.
+
+- **moviescraper**: Código del scrapper. Dentro de esta carpeta nos encontramos con: 
+  -  **imdb_scraper.py**: Clase principal. Encargada de hacer todo el proceso de *scrapper* apoyándose en el resto de clases. Fichero que debemos ejecutar para iniciar el proceso.
+  - **selenium.cfg**: Fichero de configuración de *selenium*; usado para extrar información de webs dinámicas.
+  - **core**: Carpeta donde se encuentra el *core* del código. Nos encontramos las siguientes clases: 
+    - **imdb_agent_generator.py**: Clase encargada de generar el *User Agent* que se usará en el *scrapper*
+    - **imdb_crawler.py**: Clase encargada de extraer la información en html de la web.
+    - **imdb_movie_extractor.py**: Clase encargada de extraer información a partir de 
+    - **imdb_storage_manager.py**: Clase encargada de almacenar y consultar la información en *UnQLite*. Con motivos didácticos esta información puede almacenarse también en *csv*.
+  - **dataset**: Carpeta donde se generan los ficheros *csv*.
+  - **db**: Carpeta donde se genera la BBDD de *UnQLite*.
+  - **drivers**: Carpeta para almacenar los *drivers* de *Selenium*.
+  - **utils**: Otras utilidades de código como la barra de progreso. 
+- **LICENSE**: Licencia del código, la del *dataset* se encuentra en la carpeta con ese mismo nombre. 
+- **requirements**: Requisitos para ejecutar el código en python. 
+  
 
 # Dataset 
 El dataset ha sido diseñado con una filosofía NoSQL mediante una BBDD documental, por simplicidad para la práctica se ha usado **UnQLite** ya que es una BBDD autocontenida que no requiere servidor; en un futuro podría usarse una BBDD más compleja que nos dé un mejor rendimiento y escalabilidad como puede ser MongoDB. 
