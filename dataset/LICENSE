@@ -1,7 +1,7 @@
 En cuanto al licenciamiento del dataset, lo primero ha sido referirse al apartado de la propia web, que dice:
 
 https://help.imdb.com/article/imdb/general-information/can-i-use-imdb-data-in-my-software/G5JTRESSHJBBHTGX#
-
+---------------------------------------------------------------------------------------------------------------------------
 Can I use IMDb data in my software?
 Limited non-commercial use of IMDb data is allowed, provided the following conditions are met: 
 
@@ -19,6 +19,7 @@ We reserve the right to deny any individual request for any reason.
 
 Commercial use
 Looking for information on licensing IMDb content for commercial use? See here
+---------------------------------------------------------------------------------------------------------------------------
 
 Como nuestro uso es académico y no comercial, vamos a elegir una licencia abierta haciendo mención a IMDB tal y
 como especifica la web.
