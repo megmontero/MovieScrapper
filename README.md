@@ -10,6 +10,46 @@ Esta práctica ha sido realizada por:
 - Gregorio Andrés García Menéndez
 - Manuel Enrique Gómez Montero
 
+# Investigación previa
+
+Con nuestro reconocimiento sobre el potencial de los datos en IMDB, estudiamos la viabilidad del proyecto como si se tratase de un proyecto no académico, teniendo en cuenta los siguientes puntos:
+
+- Existencia de API: a pesar de que el objetivo de esta práctica es realizar el scraping de forma obligatoria, se comprobó si IMDB contaba con API accesible y libre de cargos. IMDB no cuenta hoy día con una API oficial. Sí existe alguna pero extraoficial pero que no garantiza ningún tipo de rendimiento o disponibilidad. Por tanto, en nuestro caso el hecho de realizar scraping está justificado teniendo en cuenta este punto.
+- Accesibilidad de la información: comprobamos que los datos que queremos traernos de películas, personas y usuarios es fácilmente accesible exceptuando las reviews de los usuarios, que han requerido un uso de módulos como Selenium debido al uso de javascript. Aún así como sólo era una pequeña parte evaluamos este esfuerzo como asumible.
+- Tamaño de la información: teniendo en cuenta el carácter académico, aunque el tamaño total de toda la información es alto, siempre podemos acotar la extracción variando el rango de tiempo. Si hubiese que extraer toda la información al completo, tendríamos que contar con bastante tiempo, ya que son alrededor de 330.000 películas en total (sin contar los participantes y usuarios de cada una). En este caso habría que cambiar el almacenamiento a otra base de datos no relacional que diese mejores prestaciones tanto de rendimiento como de almacenamiento.
+- Archivo _robots.txt_: se ha visualizado el archivo _robots.txt_ y los endpoints de los cuales extraemos la información no están vetados de alguna forma:
+- Aspectos legales: refiriéndonos al apartado de imdb sobre aspectos legales (https://www.imdb.com/conditions): _Robots and Screen Scraping: You may not use data mining, robots, screen scraping, or similar data gathering and extraction tools on this site, except with our express written consent as noted below._Descargar_. Si quisiésemos realizar esta extracción de información fuera del marco académico deberíamos tener en cuenta la recomendación aquí presente.
+
+
+
+```
+# robots.txt for https://www.imdb.com properties
+User-agent: *
+Disallow: /*/*/rg*/mediaviewer/rm*/tr
+Disallow: /*/rg*/mediaviewer/rm*/tr
+Disallow: /OnThisDay
+Disallow: /ads/
+Disallow: /ap/
+Disallow: /find$
+Disallow: /find/
+Disallow: /gallery/rg*/mediaviewer/rm*/tr
+Disallow: /list/ls*/_ajax
+Disallow: /mymovies/
+Disallow: /name/nm*/mediaviewer/rm*/tr
+Disallow: /r/
+Disallow: /register
+Disallow: /registration/
+Disallow: /search/name-text
+Disallow: /search/title-text
+Disallow: /title/tt*/mediaviewer/rm*/tr
+Disallow: /tr/
+Disallow: /tvschedule
+Disallow: /updates
+Disallow: /*/mediaviewer/*/tr
+Disallow: /find
+```
+
+
 # Scrapping
 El scrapping se ha realizado en Python, usando principalmente las siguientes librerías: 
 
@@ -52,6 +92,10 @@ El objetivo de usar una BBDD documental es, por un lado, huir de la rigidez de u
 - **Users**: Colección de usuarios con los ratings que han realizado de películas. 
 - **Persons**: Colección de personas y las películas en las que han participado con distintos roles. 
 
+Lo explicado puede entenderse mejor y con más detalle en el siguiente esquema:
+
+![Dataset](images/esquema_dataset.jpeg?raw=true "Title")
+
 ## Ejemplos de documentos
 
 En la carpeta html se encuentra una página web que usando Beautiful-Collapsible-JSON-Viewer muestra un ejemplo de cada documento. Dejamos una captura de cada documento: 
@@ -59,7 +103,6 @@ En la carpeta html se encuentra una página web que usando Beautiful-Collapsible
 ![Ejemplo Movie](images/json_movie.png?raw=true "Title")
 
 ![Ejemplo Person](images/json_person.png?raw=true "Title")
-
 
 ![Ejemplo User](images/json_user.png?raw=true "Title")
 
