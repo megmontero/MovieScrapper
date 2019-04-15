@@ -14,14 +14,10 @@ Esta práctica ha sido realizada por:
 
 Con nuestro reconocimiento sobre el potencial de los datos en IMDB, estudiamos la viabilidad del proyecto como si se tratase de un proyecto no académico, teniendo en cuenta los siguientes puntos:
 
-- **Existencia de API**: a pesar de que el objetivo de esta práctica es realizar el scraping de forma obligatoria, se comprobó si IMDB contaba con API accesible y libre de cargos. IMDB no cuenta hoy día con una API oficial. Sí existe alguna pero extraoficial pero que no garantiza ningún tipo de rendimiento o disponibilidad. Por tanto, en nuestro caso el hecho de realizar scraping está justificado teniendo en cuenta este punto.
+- **Existencia de API**: a pesar de que el objetivo de esta práctica es realizar el scraping de forma obligatoria, se comprobó si IMDB contaba con API accesible y libre de cargos. IMDB no cuenta hoy día con una API oficial. Sí existe alguna extraoficial pero que no garantiza ningún tipo de rendimiento o disponibilidad. Por tanto, en nuestro caso el hecho de realizar scraping está justificado teniendo en cuenta este punto.
 - **Accesibilidad de la información**: comprobamos que los datos que queremos traernos de películas, personas y usuarios es fácilmente accesible exceptuando las reviews de los usuarios, que han requerido un uso de módulos como Selenium debido al uso de javascript. Aún así como sólo era una pequeña parte evaluamos este esfuerzo como asumible.
-- **Tamaño de la información**: teniendo en cuenta el carácter académico, aunque el tamaño total de toda la información es alto, siempre podemos acotar la extracción variando el rango de tiempo. Si hubiese que extraer toda la información al completo, tendríamos que contar con bastante tiempo, ya que son alrededor de 330.000 películas en total (sin contar los participantes y usuarios de cada una). En este caso habría que cambiar el almacenamiento a otra base de datos no relacional que diese mejores prestaciones tanto de rendimiento como de almacenamiento.
+- **Tamaño de la información**: teniendo en cuenta el carácter académico, aunque el tamaño total de toda la información es alto, siempre podemos acotar la extracción variando el rango de tiempo. Si hubiese que extraer toda la información al completo, tendríamos que contar con más recursos, ya que son alrededor de 330.000 películas en total (sin contar los participantes y usuarios de cada una). En este caso habría que cambiar el almacenamiento a otra base de datos no relacional que diese mejores prestaciones tanto de rendimiento como de almacenamiento.
 - **Archivo _robots.txt_**: se ha visualizado el archivo _robots.txt_ y los endpoints de los cuales extraemos la información no están vetados de alguna forma:
-- **Aspectos legales**: refiriéndonos al apartado de imdb sobre aspectos legales (https://www.imdb.com/conditions): _Robots and Screen Scraping: You may not use data mining, robots, screen scraping, or similar data gathering and extraction tools on this site, except with our express written consent as noted below._. Si quisiésemos realizar esta extracción de información fuera del marco académico deberíamos tener en cuenta la recomendación aquí presente.
-
-
-
 ```
 # robots.txt for https://www.imdb.com properties
 User-agent: *
@@ -48,7 +44,7 @@ Disallow: /updates
 Disallow: /*/mediaviewer/*/tr
 Disallow: /find
 ```
-
+- **Aspectos legales**: refiriéndonos al apartado de imdb sobre aspectos legales (https://www.imdb.com/conditions): _Robots and Screen Scraping: You may not use data mining, robots, screen scraping, or similar data gathering and extraction tools on this site, except with our express written consent as noted below._ Si quisiésemos realizar esta extracción de información fuera del marco académico deberíamos tener en cuenta la recomendación aquí presente.
 
 # Scrapping
 El scrapping se ha realizado en Python, usando principalmente las siguientes librerías: 
