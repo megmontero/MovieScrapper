@@ -90,10 +90,6 @@ El objetivo de usar una BBDD documental es, por un lado, huir de la rigidez de u
 - **Users**: Colección de usuarios con los ratings que han realizado de películas. 
 - **Persons**: Colección de personas y las películas en las que han participado con distintos roles. 
 
-Lo explicado puede entenderse mejor y con más detalle en el siguiente esquema:
-
-![Dataset](images/esquema_dataset.jpeg?raw=true "Title")
-
 ## Ejemplos de documentos
 
 En la carpeta html se encuentra una página web que usando Beautiful-Collapsible-JSON-Viewer muestra un ejemplo de cada documento. Dejamos una captura de cada documento: 
@@ -113,6 +109,11 @@ En la carpeta "dataset/" podemos encontrar una muestra del dataset en formato cs
 - **person_movie**: Fichero con relaciones entre personas y peliculas, especificando en rol que realiza en las mismas.
 - **user_movie**: Fichero con relaciones entre usuarios y películas, especificando la puntuación dada por cada usuario.
 
+Lo explicado puede entenderse mejor y con más detalle en el siguiente esquema:
+
+![Dataset](images/esquema_dataset.jpeg?raw=true "Title")
+
+Hay que tener en cuenta que para nuestro enfoque es más adecuado tener en mente un esquema No Relacional. La imagen anterior corresponde a la explicación del dataset desde un punto de vista relacional.
 
 La muestra que podemos encontrar en "dataset/" contiene las 100 películas de 2018 y 2019 más votadas por los usuarios. Al ser únicamente una muestra es posible que algunos ids de películas de los ficheros "user_movie.csv" y "person_movie" no se encuentren en las 100 películas extraídas del fichero "movies.csv."
 
